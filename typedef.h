@@ -6,3 +6,9 @@ typedef std::uint16_t hp_type;
 
 // stat types 
 typedef std::uint8_t stat_type; // 0 - 255
+
+// Experience Type
+typedef std::uint64_t experience_type;
+
+// Level Type
+typedef std::uint16_t level_type;

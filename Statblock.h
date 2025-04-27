@@ -15,7 +15,7 @@ public:
     explicit StatBlock(stat_type s, stat_type i){
         Strength = s;
         Intellect = i;
-        std::cout << "StatBlock created with Strength: " << Strength << ", Intellect: " << Intellect << "\n";
+        // std::cout << "StatBlock created with Strength: " << Strength << ", Intellect: " << Intellect << "\n";
     }
 
     // Getters and Setters
@@ -30,6 +30,12 @@ public:
 private:
     stat_type Strength;
     stat_type Intellect;
+
+protected:
+    void increaseStats(stat_type s, stat_type i){
+        Strength += s;
+        Intellect += i;
+    }
 };
 
 #endif // STATBLOCK_H
