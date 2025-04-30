@@ -77,6 +77,7 @@ Functions:
 
 ### Player Classes
 
+```
 They inherit from PlayerCharacterDelegate\
 properties:
     - static const well_type BASEHP       // unique characteristic of each player 
@@ -92,12 +93,13 @@ properties:
         - void LevelUp() override 
             Increases Max and Current health
             Increases stats
-
+```
 ### PlayerCharacter
-
+```
 We will use this class to create players\
 usage example:  PlayerCharacter p1(new Wizard());\
 properties:\
     PlayerCharacterDelegate * pc_class; // will be used to access everything\
 Functions:\
     PlayerCharacter(PlayerCharacterDelegate * pc) : pc_class(pc)\
+```
