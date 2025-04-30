@@ -71,6 +71,8 @@ protected:
     increaseStats((stat_type)((BASESTR+1u)/2.f), (stat_type)((BASEINT+1u)/2.f));\
 }
 
+// ----------------------Player Classes---------------------------------------
+
 class Healer : public PlayerCharacterDelegate {
 public: 
   
@@ -134,6 +136,8 @@ public:
 private:
     LEVELUP
 };
+
+// ----------------------Player Classes end-----------------------------------
 
 class PlayerCharacter {
 private:
