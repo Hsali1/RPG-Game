@@ -28,14 +28,16 @@ quick theoretical lists to get started
 - world levels
 - different monsters
 
+---
+
 # Code
 
 ## PlayerCharacter.h
 
 ### PlayerCharacterDelegate : public StatBlock
 ```
-PlayerCharacterDelegate is a pure virtual class \
-will inherit from StatBlock \
+PlayerCharacterDelegate is a pure virtual class
+will inherit from StatBlock
 Properties:
     - static const experience_type LEVEL_2_AT = 100u;
     - static const experience_type LEVEL_SCALAR = 2u;
@@ -78,7 +80,7 @@ Functions:
 ### Player Classes
 
 ```
-They inherit from PlayerCharacterDelegate\
+They inherit from PlayerCharacterDelegate
 properties:
     - static const well_type BASEHP       // unique characteristic of each player 
     - static const stat_type BASESTR      // unique characteristic of each player 
@@ -96,10 +98,10 @@ properties:
 ```
 ### PlayerCharacter
 ```
-We will use this class to create players\
-usage example:  PlayerCharacter p1(new Wizard());\
-properties:\
-    PlayerCharacterDelegate * pc_class; // will be used to access everything\
-Functions:\
-    PlayerCharacter(PlayerCharacterDelegate * pc) : pc_class(pc)\
+We will use this class to create players
+usage example:  PlayerCharacter p1(new Wizard());
+properties:
+    PlayerCharacterDelegate * pc_class; // will be used to access everything
+Functions:
+    PlayerCharacter(PlayerCharacterDelegate * pc) : pc_class(pc)
 ```
