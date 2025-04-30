@@ -33,7 +33,7 @@ quick theoretical lists to get started
 ## PlayerCharacter.h
 
 ### PlayerCharacterDelegate : public StatBlock
-
+```
 PlayerCharacterDelegate is a pure virtual class \
 will inherit from StatBlock \
 Properties:
@@ -73,6 +73,7 @@ Functions:
         void increaseStats(stat_type s, stat_type i)
             adds s to current strength
             adds i to current intellect
+```
 
 ### Player Classes
 
