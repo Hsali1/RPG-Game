@@ -12,10 +12,11 @@ public:
     static const experience_type LEVEL_2_AT = 100u;
     static const experience_type LEVEL_SCALAR = 2u; // multiplier for exp requirements
 
-    PlayerCharacterDelegate() : StatBlock(0u, 0u){
+    PlayerCharacterDelegate() : StatBlock(0u, 0u, 0u){
         current_level = 1u;
         current_exp = 0u;
         exp_to_next_level = LEVEL_2_AT;
+        // HP = std::unique_ptr<PointWell>(new PointWell());
         HP = std::make_unique<PointWell>();
     }
 
@@ -61,82 +62,34 @@ protected:
 #define PCCONSTRUCT : PlayerCharacterDelegate() {\
     HP->setMax(BASEHP);\
     HP->increaseCurrent(BASEHP);\
-    increaseStats(BASESTR, BASEINT);\
+    increaseStats(BASESTR, BASEINT, BASEAGI);\
 }
 
 // Macro Level Up
 #define LEVELUP void LevelUp() override {\
     HP->setMax((well_type)(BASEHP/2.f + HP->getMax()));\
     HP->increaseCurrent((well_type)(BASEHP/2.f + HP->getMax()));\
-    increaseStats((stat_type)((BASESTR+1u)/2.f), (stat_type)((BASEINT+1u)/2.f));\
+    increaseStats((stat_type)((BASESTR+1u)/2.f), (stat_type)((BASEINT+1u)/2.f), (stat_type)((BASEAGI+1u)/2.f));\
 }
 
+// Macro Player class
+#define CHARACTERCLASS(classname, basehp, basestr, baseint, baseagi)\
+class classname : public PlayerCharacterDelegate {\
+public:\
+    static const well_type BASEHP = (well_type)basehp;\
+    static const stat_type BASESTR = (stat_type)basestr;\
+    static const stat_type BASEINT = (stat_type)baseint;\
+    static const stat_type BASEAGI = (stat_type)baseagi;\
+    std::string getClassName() override { return std::string(#classname); }\
+    classname() PCCONSTRUCT \
+private:\
+    LEVELUP\
+};
 // ----------------------Player Classes---------------------------------------
-
-class Healer : public PlayerCharacterDelegate {
-public: 
-  
-    static const well_type BASEHP = (well_type)14u;
-    static const stat_type BASESTR = (stat_type) 2u;
-    static const stat_type BASEINT = (stat_type) 3u;
-
-    Healer() PCCONSTRUCT
-
-    std::string getClassName() override {
-        return std::string("Healer");
-    }
-private:
-    LEVELUP
-};
-
-class Rogue : public PlayerCharacterDelegate {
-public: 
-
-    static const well_type BASEHP = (well_type)12u;
-    static const stat_type BASESTR = (stat_type) 3u;
-    static const stat_type BASEINT = (stat_type) 2u;
-
-    Rogue() PCCONSTRUCT
-
-    std::string getClassName() override {
-        return std::string("Rogue");
-    }
-private:
-    LEVELUP
-};
-
-class Warrior : public PlayerCharacterDelegate {
-public: 
-
-    static const well_type BASEHP = (well_type)18u;
-    static const stat_type BASESTR = (stat_type) 4u;
-    static const stat_type BASEINT = (stat_type) 1u;
-
-    Warrior() PCCONSTRUCT
-
-    std::string getClassName() override {
-        return std::string("Warrior");
-    }
-private:
-    LEVELUP 
-};
-
-class Wizard : public PlayerCharacterDelegate {
-public: 
-
-    static const well_type BASEHP = (well_type) 10u;
-    static const stat_type BASESTR = (stat_type) 1u;
-    static const stat_type BASEINT = (stat_type) 4u;
-
-    Wizard() PCCONSTRUCT
-
-    std::string getClassName() override {
-        return std::string("Wizard");
-    }
-private:
-    LEVELUP
-};
-
+CHARACTERCLASS(Healer, 14, 3, 5, 1)
+CHARACTERCLASS(Rogue, 14, 3, 3, 5)
+CHARACTERCLASS(Wizard, 10, 1, 8, 1)
+CHARACTERCLASS(Warrior, 18, 5, 2, 2)
 // ----------------------Player Classes end-----------------------------------
 
 class PlayerCharacter {
@@ -155,6 +108,9 @@ public:
     well_type getMaxHP()                { return pc_class->HP->getMax(); }
     stat_type getStrength()             { return pc_class->getStrength(); }
     stat_type getIntellect()            { return pc_class->getIntellect(); }
+    stat_type getAgility()              { return pc_class->getAgility(); }
+    stat_type getArmor()                { return pc_class->getArmor(); }
+    stat_type getElementResistance()    { return pc_class->getElementRes(); }
 
     void gainEXP(experience_type amt) { pc_class->gainEXP(amt); }
     void takeDamage(well_type amt) { pc_class->HP->reduceCurrent(amt); }
