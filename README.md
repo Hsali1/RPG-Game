@@ -2,10 +2,10 @@ To run = g++ main.cpp -o rpp_game
 
 # Demo_rpg
 
-Warrior - HP Growth 20 : Highest damage reduction
-Mage - HP Growth 10 : Magic damage
-Healer - HP Growth 14 : Support Magic
-Rogue - HP Growth 12 : Highest consistent mele/ranged damage
+    - Warrior - HP Growth 20 : Highest damage reduction
+    - Mage - HP Growth 10 : Magic damage
+    - Healer - HP Growth 14 : Support Magic
+    - Rogue - HP Growth 12 : Highest consistent mele/ranged damage
 
 ## designs
 
